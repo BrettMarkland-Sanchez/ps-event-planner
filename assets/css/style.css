@@ -1,3 +1,77 @@
+html {
+    font-family: 'MeriendaOne';
+    color: whitesmoke;
+    background-color: whitesmoke;
+    min-height: fit-content;
+}
+
+p {
+    line-height: 1.5em;
+}
+
+@font-face {
+    font-family: 'Berkshire Swash';
+    src: url(../fonts/BerkshireSwash-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'MeriendaOne';
+    src: url(../fonts/MeriendaOne-Regular.ttf);
+}
+
+.title {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.title h1 {
+    text-shadow: gray -3px 2px;
+    font-family: 'Berkshire Swash';
+    font-size: 3em;
+    margin-top: 1%;
+}
+
 .table-of-contents {
+    font-size: larger;
     position: fixed;
+    align-items: stretch;
+}
+
+.table-of-contents a {
+    color: whitesmoke;
+    font-weight: 500;
+}
+
+.table-of-contents a:hover {
+    color: #fc4a1a;
+}
+
+body {
+    background: #4abdac;
+    display: flex;
+    min-height: 100vh;
+}
+
+.mid-height {
+    height: 70vh;
+}
+
+@media screen and (min-width: 0px) {
+    .card {
+        margin-left: 0;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .card {
+        margin-left: 10%;
+        margin-right: -10%;
+    }
+}
+
+@media screen and (min-width: 720px) {
+    .card {
+        margin-left: 5%;
+        margin-right: auto;
+    }
 }
