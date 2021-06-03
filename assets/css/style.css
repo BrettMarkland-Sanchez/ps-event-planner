@@ -38,6 +38,11 @@ p {
     align-items: stretch;
 }
 
+button {
+    margin: 1em;
+    
+}
+
 .table-of-contents a {
     color: whitesmoke;
     font-weight: 500;
