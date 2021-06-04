@@ -11,7 +11,7 @@
     <title>Power Station Event Wizard</title>
 </head>
 <body class="container">
-    
+
     <div class="col valign-wrapper mid-height" >
         <!-- Materialize Table of Contents -->
         <div class="col hide-on-small-only m3">
@@ -19,7 +19,10 @@
                 <div style="height: 1px;"> 
                     <ul class="section table-of-contents">
                         <li>
-                            <a href="#new">New Event</a>
+                            <a id="new" href="#">New Event</a>
+                        </li>
+                        <li>
+                            <a id="myEvent" href="#">My Event</a>
                         </li>
                         <li>
                             <a href="#saved">Saved Events</a>
@@ -47,23 +50,27 @@
             </h1>
         </div>
 
-        <div id="new" class="hides">
-            <textarea class="center-align" placeholder="Name Your Event"></textarea>
+        <div id="newEvent" class="">
+            <h2>Welcome to our Event Planner!</h2>
+            <h3>To get started, enter an event name:</h3>
+            <textarea id="newEventName" class="center-align" placeholder="Name Your Event"></textarea>
             <div class="row">
-                <button class="btn waves-effect waves-light blue">Clear</button>
-                <button class="btn waves-effect waves-light blue">Continue</button>
+                <button id="clearNew" class="btn waves-effect waves-light blue">Clear</button>
+                <button id="contNew" class="btn waves-effect waves-light blue">Continue</button>
             </div>
         </div>
 
         <!-- Materialize Cards -->
-        <div id="event" class="hide">
+        <div id="planner" class="hide">
             <div class="col s12 m9 offset-m2">
-                <div class="card cyan darken-3">
+                <h4 id="eventName">My Awesome Event</h4>
+                <h5 id="helpText">Add an Event Name in "New Event" to Save</h5>
+                <div id="food" class="card cyan darken-3">
                     <div class="card-content white-text">
                         <span class="card-title">Food</span>
                         <p>Please select a few categories for your menu suggestions:</p>
                     </div>
-                    <div class="card-action">
+                    <div id = "meal-categories" class="card-action">
                         <img src="https://via.placeholder.com/150">
                         <img src="https://via.placeholder.com/150">
                         <img src="https://via.placeholder.com/150">
@@ -75,7 +82,7 @@
                 </div>
             </div>
             <div class="col s12 m9 offset-m2">
-                <div class="card cyan darken-3">
+                <div id="drinks" class="card cyan darken-3">
                     <div class="card-content white-text">
                         <span class="card-title">Drinks</span>
                         <p>Please select a few categories for your menu suggestions:</p>
@@ -92,7 +99,7 @@
                 </div>
             </div>
             <div class="col s12 m9 offset-m2">
-                <div class="card cyan darken-3">
+                <div id="music" class="card cyan darken-3">
                     <div class="card-content white-text">
                         <span class="card-title">Music</span>
                         <p>Please select a few categories for your menu suggestions:</p>
@@ -118,6 +125,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Our script file -->
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/mealAPI.js"></script>
 
 </body>
 </html>
