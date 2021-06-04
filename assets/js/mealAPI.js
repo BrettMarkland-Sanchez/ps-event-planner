@@ -25,7 +25,7 @@ function displayMealCatButtons(mealCatArray, mealCatPhotoLinkArray){
         catBtn.src = mealCatPhotoLinkArray[i]
         catBtn.setAttribute('style',`background:${mealCatPhotoLinkArray[i]}`);
 
-        mealCatCard.appendChild(catBtn);
+        mealCatCard.append(catBtn);
 
     }
 }
