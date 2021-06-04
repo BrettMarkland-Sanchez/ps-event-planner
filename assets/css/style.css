@@ -5,6 +5,30 @@ html {
     min-height: fit-content;
 }
 
+h2 {
+    font-size: 2.5em;
+    text-align: center;
+}
+
+h3 {
+    font-size: 2em;
+    text-align: center;
+}
+
+h4 {
+    font-size: 2em;
+    text-align: center;
+    color: lightgray;
+    margin-top: 0;
+}
+
+h5 {
+    font-size: 1em;
+    text-align: center;
+    color: gray;
+    margin-top: 0;
+}
+
 p {
     line-height: 1.5em;
 }
@@ -22,6 +46,8 @@ p {
 .title {
     margin-left: 5%;
     margin-right: 5%;
+    margin-bottom: 1em;
+    border-bottom: 5px solid teal;
 }
 
 .title h1 {
@@ -36,6 +62,10 @@ p {
     font-size: larger;
     position: fixed;
     align-items: stretch;
+}
+
+button {
+    margin: 1em;
 }
 
 .table-of-contents a {
