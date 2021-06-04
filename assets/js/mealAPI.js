@@ -1,5 +1,5 @@
 //Meal API
-let mealCatURL = 'http://www.themealdb.com/api/json/v1/1/categories.php';
+let mealCatURL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
 let mealCatCard = $('#meal-categories');
 
 fetch(mealCatURL)
