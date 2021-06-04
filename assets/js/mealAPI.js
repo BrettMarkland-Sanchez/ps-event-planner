@@ -23,7 +23,7 @@ function displayMealCatButtons(mealCatArray, mealCatPhotoLinkArray){
         let catBtn = document.createElement('input');
         catBtn.type = 'image';
         catBtn.src = mealCatPhotoLinkArray[i]
-        catBtn.setAttribute('style','background:') = mealCatPhotoLinkArray[i];
+        catBtn.setAttribute('style',`background:${mealCatPhotoLinkArray[i]}`);
 
         mealCatCard.appendChild(catBtn);
 
