@@ -83,31 +83,26 @@
                         <span class="card-title">Drinks</span>
                         <p>Please select a few categories for your menu suggestions:</p>
                     </div>
-                    <div class="card-action">
-                        <img src="https://via.placeholder.com/150">
-                        <img src="https://via.placeholder.com/150">
-                        <img src="https://via.placeholder.com/150">
-                    </div>
+                    <div id="drink-categories" class="card-action"></div>
                     <div>
                         <button class="btn waves-effect waves-light blue">Clear</button>
                         <button class="btn waves-effect waves-light blue">Continue</button>
                     </div>
                 </div>
             </div>
+
             <div class="col s12 m9 offset-m2">
                 <div id="music" class="card cyan darken-3">
                     <div class="card-content white-text">
                         <span class="card-title">Music</span>
-                        <p>Please select a few categories for your menu suggestions:</p>
                     </div>
-                    <div class="card-action">
-                        <img src="https://via.placeholder.com/150">
-                        <img src="https://via.placeholder.com/150">
-                        <img src="https://via.placeholder.com/150">
+                    <div id="music-card"class="card-action">
+                        <h3>For playlist recommendations, please enter a few keywords:</h3>
+                        <textarea id="playlist-keywords" class="center-align" placeholder="Playlist Keywords"></textarea>
                     </div>
                     <div>
                         <button class="btn waves-effect waves-light blue">Clear</button>
-                        <button class="btn waves-effect waves-light blue">Continue</button>
+                        <button id="music-continue-btn" class="btn waves-effect waves-light blue">Continue</button>
                     </div>
                 </div>
             </div>
@@ -122,6 +117,9 @@
     <!-- Our script file -->
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/mealAPI.js"></script>
+    <script src="./assets/js/drinkAPI.js"></script>
+    <script src="./assets/js/musicAPI.js"></script>
+
 
 </body>
 </html>

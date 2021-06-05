@@ -6,6 +6,9 @@ let planner = $('#planner');
 let newEventName = $('#newEventName');
 let clearNew = $('#clearNew');
 let contNew = $('#contNew');
+let eventName = $('#eventName');
+let helpText = $('#helpText');
+var myEventName;
 
 // Table of Contents Nav Logic
 
@@ -22,3 +25,15 @@ myLink.click(function(){
 clearNew.click(function(){
     newEventName.val("");
 })
+
+contNew.click(function(){
+    myEventName = newEventName.val();
+    nameMyEvent(myEventName);
+})
+
+function nameMyEvent(myEventName){
+    eventName.text(`${myEventName}`);
+    helpText.hide();
+    newEvent.addClass('hide');
+    planner.removeClass('hide');
+}
