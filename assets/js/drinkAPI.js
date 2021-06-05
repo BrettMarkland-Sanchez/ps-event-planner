@@ -1,6 +1,6 @@
 //Drink API
 //set api endpoint url as variable
-let drinkCatURL = 'https://www.thecocktaildb.com/api/json/v1/1/categories.php';
+let drinkCatURL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail';
 //set DOM element for drink category cards as variable
 let drinkCatCard = $('#drink-categories');
 //fetch data from api endpoint
@@ -19,8 +19,8 @@ fetch(drinkCatURL)
     //for each category returned from the API, store the name in drinkCatArray
     //and store the photo link in drinkCatPhotoLinkArray
     for(let i=0;i<data.categories.length;i++){
-        drinkCatArray.push(data.categories[i].strCategory);
-        drinkCatPhotoLinkArray.push(data.categories[i].strCategoryThumb);
+        drinkCatArray.push(data.categories[i].strDrink);
+        drinkCatPhotoLinkArray.push(data.categories[i].strDrinkThumb);
     }
 //pass the name array and the photo link array to the display function
     displaydrinkCatButtons(drinkCatArray,drinkCatPhotoLinkArray);
