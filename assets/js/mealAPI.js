@@ -19,6 +19,9 @@ fetch(mealCatURL)
     //and store the photo link in mealCatPhotoLinkArray
     for(let i=0;i<data.categories.length;i++){
         mealCatArray.push(data.categories[i].strCategory);
+        if(data.categories[i].strCategory == 'Chicken'){
+            mealCatPhotoLinkArray.push('https://www.themealdb.com/images/ingredients/Chicken.png');
+        }else
         mealCatPhotoLinkArray.push(data.categories[i].strCategoryThumb);
     }
 
@@ -29,12 +32,29 @@ fetch(mealCatURL)
 //with the array data, and then appending them to the meal category card
 function displayMealCatButtons(mealCatArray, mealCatPhotoLinkArray){
     for(let i=0; i<mealCatArray.length;i++){
-        let catBtn = document.createElement('input');
-        catBtn.type = 'image';
-        catBtn.src = mealCatPhotoLinkArray[i]
-        catBtn.setAttribute('style',`background:${mealCatPhotoLinkArray[i]}`);
+        
+        // Create parent div for formatting images with text to display correctly
+        let catBtnParent = document.createElement('div');
+        catBtnParent.setAttribute('class','col s6 m4 l3');
+        catBtnParent.setAttribute('style',`padding-bottom:.5em`);
 
-        mealCatCard.append(catBtn);
+        // Create/add image to parent
+        let catBtn = document.createElement('img');
+        catBtn.src = mealCatPhotoLinkArray[i];
+        catBtn.setAttribute('style',`background:${mealCatPhotoLinkArray[i]}; width:120px; height:100px`);
+        catBtnParent.append(catBtn);
 
+        // Create/add text to parent
+        let catBtnText = document.createElement('p');
+        catBtnText.innerText = `${mealCatArray[i]}`;
+        catBtnParent.append(catBtnText);
+
+        // Add parent to card
+        mealCatCard.append(catBtnParent);
+
+        // Inserts a row at the end to complete card section
+        if(i == mealCatArray.length-1){
+            mealCatCard.append(`<div class='row'></div>`);
+        }
     }
 }

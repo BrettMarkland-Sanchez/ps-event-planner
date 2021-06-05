@@ -1,6 +1,6 @@
 //Drink API
 //set api endpoint url as variable
-let drinkCatURL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail';
+let drinkCatURL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i='[userinput];
 //set DOM element for drink category cards as variable
 let drinkCatCard = $('#drink-categories');
 //fetch data from api endpoint
@@ -25,6 +25,9 @@ fetch(drinkCatURL)
 //pass the name array and the photo link array to the display function
     displaydrinkCatButtons(drinkCatArray,drinkCatPhotoLinkArray);
 }
+
+//NOT THE SAME NEED TO CHANGE
+
 //this function displays the categories by creating elements, filling them
 //with the array data, and then appending them to the drink category card
 function displaydrinkCatButtons(drinkCatArray, drinkCatPhotoLinkArray){
@@ -35,6 +38,5 @@ function displaydrinkCatButtons(drinkCatArray, drinkCatPhotoLinkArray){
         catBtn.setAttribute('style',`background:${drinkCatPhotoLinkArray[i]}`);
 
         drinkCatCard.append(catBtn);
-
     }
 }
