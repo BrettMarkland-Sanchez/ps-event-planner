@@ -14,7 +14,7 @@
 
     <div class="col valign-wrapper mid-height" >
         <!-- Materialize Table of Contents -->
-        <div class="col hide-on-small-only m3">
+        <div class="col">
             <div class="toc-wrapper">
                 <div style="height: 1px;"> 
                     <ul class="section table-of-contents">
@@ -25,7 +25,7 @@
                             <a id="myEvent" href="#">My Event</a>
                         </li>
                         <li>
-                            <a href="#saved">Saved Events</a>
+                            <a id="saved" href="#">Saved Events</a>
                         </li>
                         <li>
                             <a href="#food">Food</a>
@@ -42,90 +42,106 @@
         </div>
     </div>
 
-    <div class="row">
+    <main>
+        <div class="row">
 
-        <div class="row title center-align">
-            <h1>
-                Team PowerStation <br> Event Planner                
-            </h1>
-        </div>
-
-        <div id="newEvent" class="">
-            <h2>Welcome to our Event Planner!</h2>
-            <h3>To get started, enter an event name:</h3>
-            <textarea id="newEventName" class="center-align" placeholder="Name Your Event"></textarea>
-            <div class="row">
-                <button id="clearNew" class="btn waves-effect waves-light blue">Clear</button>
-                <button id="contNew" class="btn waves-effect waves-light blue">Continue</button>
+            <!-- Website Title -->
+            <div class="row title center-align">
+                <h1>
+                    Team PowerStation <br> Event Planner                
+                </h1>
             </div>
-        </div>
 
-        <!-- Materialize Cards -->
-        <div id="planner" class="hide">
-            <div class="col s12 m9 offset-m2">
-                <h4 id="eventName">My Awesome Event</h4>
-                <h5 id="helpText">Add an Event Name in "New Event" to Save</h5>
-                <div id="food" class="card cyan darken-3">
-                    <div class="card-content white-text">
-                        <span class="card-title">Food</span>
-                        <p>Please select a few categories for your menu suggestions:</p>
+            <!-- New Event Page -->
+            <div id="newEvent" class="">
+                <h2>Welcome to our Event Planner!</h2>
+                <h3>To get started, enter an event name:</h3>
+                <textarea id="newEventName" class="center-align" placeholder="Name Your Event"></textarea>
+                <div class="row">
+                    <button id="clearNew" class="btn waves-effect waves-light blue">Clear</button>
+                    <button id="contNew" class="btn waves-effect waves-light blue">Continue</button>
+                </div>
+            </div>
+
+            <!-- Materialize Cards used for My Event Page -->
+            <div id="planner" class="hide">
+                <div class="col s12">
+                    <h4 id="eventName">My Awesome Event</h4>
+                    <h5 id="helpText">Add an Event Name in "New Event" to Save</h5>
+                    <div id="food" class="card cyan darken-3">
+                        <div class="card-content white-text">
+                            <span class="card-title">Food</span>
+                            <p>Please select a few categories for your menu suggestions:</p>
+                        </div>
+                        <div id="meal-categories" class="card-action"></div>
+                        <div>
+                            <button class="btn waves-effect waves-light blue">Clear</button>
+                            <button class="btn waves-effect waves-light blue">Continue</button>
+                        </div>
                     </div>
-                    <div id = "meal-categories" class="card-action">
-                        <img src="https://via.placeholder.com/150">
-                        <img src="https://via.placeholder.com/150">
-                        <img src="https://via.placeholder.com/150">
+                </div>
+                <div class="col s12">
+                    <div id="drinks" class="card cyan darken-3">
+                        <div class="card-content white-text">
+                            <span class="card-title">Drinks</span>
+                            <p>Please select a few categories for your menu suggestions:</p>
+                        </div>
+                        <div id="drink-categories" class="card-action"></div>
+                        <div>
+                            <button class="btn waves-effect waves-light blue">Clear</button>
+                            <button class="btn waves-effect waves-light blue">Continue</button>
+                        </div>
                     </div>
-                    <div>
-                        <button class="btn waves-effect waves-light blue">Clear</button>
-                        <button class="btn waves-effect waves-light blue">Continue</button>
+                </div>
+
+                <div class="col s12">
+                    <div id="music" class="card cyan darken-3">
+                        <div class="card-content white-text">
+                            <span class="card-title">Music</span>
+                        </div>
+                        <div id="music-card"class="card-action">
+                            <h3>For playlist recommendations, please enter a few keywords:</h3>
+                            <textarea id="playlist-keywords" class="center-align" placeholder="Playlist Keywords"></textarea>
+                        </div>
+                        <div>
+                            <button class="btn waves-effect waves-light blue">Clear</button>
+                            <button id="music-continue-btn" class="btn waves-effect waves-light blue">Continue</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col s12 m9 offset-m2">
-                <div id="drinks" class="card cyan darken-3">
-                    <div class="card-content white-text">
-                        <span class="card-title">Drinks</span>
-                        <p>Please select a few categories for your menu suggestions:</p>
-                    </div>
-                    <div class="card-action">
-                        <img src="https://via.placeholder.com/150">
-                        <img src="https://via.placeholder.com/150">
-                        <img src="https://via.placeholder.com/150">
-                    </div>
-                    <div>
-                        <button class="btn waves-effect waves-light blue">Clear</button>
-                        <button class="btn waves-effect waves-light blue">Continue</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m9 offset-m2">
-                <div id="music" class="card cyan darken-3">
-                    <div class="card-content white-text">
-                        <span class="card-title">Music</span>
-                        <p>Please select a few categories for your menu suggestions:</p>
-                    </div>
-                    <div class="card-action">
-                        <img src="https://via.placeholder.com/150">
-                        <img src="https://via.placeholder.com/150">
-                        <img src="https://via.placeholder.com/150">
-                    </div>
-                    <div>
-                        <button class="btn waves-effect waves-light blue">Clear</button>
-                        <button class="btn waves-effect waves-light blue">Continue</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    </div> 
+            <!-- Saved Events Page -->
+            <div id="savedEvents" class="hide">
+                <div class="col s12">
+                    <h4>My Saved Events</h4>
+                    <h5>Select a previously saved event and click load to view it!</h5>
+                    <div class="card cyan darken-3">
+                        <div class="card-content white-text">
+                            <span class="card-title">Saved Event Name</span>
+                            <h3 id = "savedEventFood">Food:</h3>
+                            <h3 id = "savedEventDrinks">Drinks:</h3>
+                            <h3 id = "savedEventMusic">Music:</h3>
+                        </div>
+                        <div id = "savedEventDetails" class="card-action"></div>
+                        <div>
+                            <button class="btn waves-effect waves-light blue">Load</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </main>
 
     <!-- Materialize compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Our script file -->
+    <!-- Our script files -->
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/mealAPI.js"></script>
+    <script src="./assets/js/drinkAPI.js"></script>
+    <script src="./assets/js/musicAPI.js"></script>
 
 </body>
 </html>
