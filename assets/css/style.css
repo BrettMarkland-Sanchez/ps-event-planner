@@ -50,6 +50,27 @@ p {
     src: url(../fonts/MeriendaOne-Regular.ttf);
 }
 
+.selected {
+    outline: 4px solid #fff;
+    margin: 5px;
+}
+
+[type="radio"]:checked + span:after{
+    background-color: blue;
+}
+
+[type="radio"]{
+    margin-left: 10px;
+}
+
+p label span{
+    color: #fff;
+}
+
+.mealCat {
+    box-sizing: border-box;
+}
+
 .title {
     margin-left: 5%;
     margin-right: 5%;

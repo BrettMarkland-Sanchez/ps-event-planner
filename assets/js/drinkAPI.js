@@ -1,32 +1,39 @@
 //Drink API
+let chosenIngredient;
+let alcoholIngredients = ['Rum', 'vodka', 'bourbon', 'gin', 'tequila'];
 //set api endpoint url as variable
-let drinkCatURL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i='[userinput];
+let drinkCatURL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=`;
+
+$('input[name="group1"]:checked').val();
+
 //set DOM element for drink category cards as variable
 let drinkCatCard = $('#drink-categories');
 //fetch data from api endpoint
-fetch(drinkCatURL)
+
+/*
+fetch(drinkCatURL+`${chosenIngredient}`)
     //transform response into JSON via .then
     .then(response => response.json())
     //pass JSON data into filldrinkCatArray function
     .then(data => filldrinkCatArray(data));
-    
+*/
     //this function reads thru the api data and creates an array of categories and an array
     //of the photo links for each category
     function filldrinkCatArray(data){
     //create array for category names and image links
     let drinkCatArray = [];
-    let drinkCatPhotoLinkArray =[]
+    let drinkCatPhotoLinkArray = [];
     //for each category returned from the API, store the name in drinkCatArray
     //and store the photo link in drinkCatPhotoLinkArray
     for(let i=0;i<data.categories.length;i++){
         drinkCatArray.push(data.categories[i].strDrink);
         drinkCatPhotoLinkArray.push(data.categories[i].strDrinkThumb);
     }
+
+    
 //pass the name array and the photo link array to the display function
     displaydrinkCatButtons(drinkCatArray,drinkCatPhotoLinkArray);
 }
-
-//NOT THE SAME NEED TO CHANGE
 
 //this function displays the categories by creating elements, filling them
 //with the array data, and then appending them to the drink category card
@@ -40,3 +47,29 @@ function displaydrinkCatButtons(drinkCatArray, drinkCatPhotoLinkArray){
         drinkCatCard.append(catBtn);
     }
 }
+////////////////////////////////////////////////////////////////////////////////////
+// First Prompt: Alcoholic(Continue the prompt to pre selected ingredients) or
+// Non-Alcoholic(End questions and pull 4-6 drinks from "www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic")
+//Use [Math.floor(Math.random() * arr.length)] to return a random drink from the provided array
+
+// This code can take care of our random 5 or so drink recommendations for the user
+
+//const originalArray = $[Have this be the returned api array];
+
+// The value of n will be the amount of items returned from the array
+
+//const randomSelection = (n) => {
+//    let newArr = [];
+//    if (n >= originalArray.length) {
+//      return originalArray;
+//    }
+//    for (let i = 0; i < n; i++) {
+//      let newElem = originalArray[Math.floor(Math.random() * originalArray.length)];
+//      while (newArr.includes(newElem)) {
+//        newElem = originalArray[Math.floor(Math.random() * originalArray.length)];
+//      }
+//      newArr.push(newElem);
+//    }
+//    return newArr;
+//  }
+//  console.log(randomSelection(5));
