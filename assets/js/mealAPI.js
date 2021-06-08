@@ -72,7 +72,7 @@ $(document).on('click','.mealCat',function(){
     $(this).toggleClass('selected','');
     // determines whether the id is already in the mealCatSelect array and if so, splice, if not, push
     if(mealCatSelect.find(element => element == `${elementID}`)){
-        mealCatSelect.splice((mealCatSelect.findIndex(element => element == `${elementID}`)), 1)
+        mealCatSelect.splice((mealCatSelect.findIndex(element => element == `${elementID}`)), 1);
     } else mealCatSelect.push(`${elementID}`);
 }
 });
