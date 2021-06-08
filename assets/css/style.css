@@ -51,8 +51,7 @@ p {
 }
 
 .selected {
-    outline: 4px solid #fff;
-    margin: 5px;
+    background-color: blue;
 }
 
 [type="radio"]:checked + span:after{
@@ -121,6 +120,10 @@ textarea {
 
 .mid-height {
     height: 70vh;
+}
+
+#drinkCard1 p {
+    margin-left: 1em;
 }
 
 /*

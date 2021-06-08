@@ -1,22 +1,38 @@
 //Drink API
 let chosenIngredient;
-let alcoholIngredients = ['Rum', 'vodka', 'bourbon', 'gin', 'tequila'];
+let alcoholIngredients = ['rum', 'vodka', 'bourbon', 'gin', 'tequila'];
+let clearDrink = $('#clearDrink');
+let contDrink = $('#contDrink');
+let drinkCard1 = $('#drinkCard1');
+let drinkCard2 = $('#drinkCard2');
+let drinkRadio = $('input[name="group1"]');
+
 //set api endpoint url as variable
 let drinkCatURL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=`;
-
-$('input[name="group1"]:checked').val();
 
 //set DOM element for drink category cards as variable
 let drinkCatCard = $('#drink-categories');
 //fetch data from api endpoint
 
-/*
+// Radio buttons are used to collect user input for drink selection
+// API then returns full set of results that get randomly selected for the user
+clearDrink.click(function(){
+    drinkCard2.addClass('hide');
+    drinkRadio[0].checked = false;
+    drinkRadio[1].checked = false;
+    drinkCard1.removeClass('hide');
+})
+
+$('input[name="group1"]:checked').val();
+
+/***********************Code Ideas***************************
+ * 
 fetch(drinkCatURL+`${chosenIngredient}`)
     //transform response into JSON via .then
     .then(response => response.json())
     //pass JSON data into filldrinkCatArray function
     .then(data => filldrinkCatArray(data));
-*/
+
     //this function reads thru the api data and creates an array of categories and an array
     //of the photo links for each category
     function filldrinkCatArray(data){
@@ -80,3 +96,5 @@ function displaydrinkCatButtons(drinkCatArray, drinkCatPhotoLinkArray){
 //    return newArr;
 //  }
 //  console.log(randomSelection(5));
+*
+********************************************************/
