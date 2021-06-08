@@ -72,14 +72,19 @@
                     <h4 id="eventName">My Awesome Event</h4>
                     <h5 id="helpText">Add an Event Name in "New Event" to Save</h5>
                     <div id="food" class="card cyan darken-3">
-                        <div class="card-content white-text">
-                            <span class="card-title">Food</span>
-                            <p>Please select a few categories for your menu suggestions:</p>
+                        <div id="mealCard1">
+                            <div class="card-content white-text">
+                                <span class="card-title">Food</span>
+                                <p>Please select a few categories for your menu suggestions:</p>
+                            </div>
+                            <div id="meal-categories" class="section card-action"></div>
+                            <div>
+                                <button class="btn waves-effect waves-light blue">Clear</button>
+                                <button class="btn waves-effect waves-light blue">Continue</button>
+                            </div>
                         </div>
-                        <div id="meal-categories" class="card-action"></div>
-                        <div>
-                            <button class="btn waves-effect waves-light blue">Clear</button>
-                            <button class="btn waves-effect waves-light blue">Continue</button>
+                        <div id="mealCard2" class="hide">
+                            
                         </div>
                     </div>
                 </div>
@@ -87,13 +92,35 @@
                     <div id="drinks" class="card cyan darken-3">
                         <div class="card-content white-text">
                             <span class="card-title">Drinks</span>
-                            <p>Please select a few categories for your menu suggestions:</p>
+                            <p>Please select a drink preference to receive your menu suggestions:</p>
                         </div>
                         <div id="drink-categories" class="card-action"></div>
+                        <div id="drinkCard1">
+                            <form action="#">
+                                <p>
+                                  <label>
+                                    <input name="group1" type="radio" value="alcoholic"/>
+                                    <span>Alcoholic</span>
+                                  </label>
+                                </p>
+                                <div class="row"></div>
+                                <p>
+                                    <label>
+                                      <input name="group1" type="radio" value="non-alcoholic"/>
+                                      <span>Non-alcoholic</span>
+                                    </label>
+                                </p>
+                                <div class="row"></div>
+                            </form>
+                        </div>
                         <div>
                             <button class="btn waves-effect waves-light blue">Clear</button>
                             <button class="btn waves-effect waves-light blue">Continue</button>
                         </div>
+                        <!-- 
+                            <button class="btn waves-effect waves-light blue">Alcoholic or None Alcoholic Drink</button>
+                            <button class="btn waves-effect waves-light blue">See Drink Choices</button>
+                        -->
                     </div>
                 </div>
 

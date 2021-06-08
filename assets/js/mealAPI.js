@@ -24,7 +24,6 @@ fetch(mealCatURL)
         }else
         mealCatPhotoLinkArray.push(data.categories[i].strCategoryThumb);
     }
-
     //pass the name array and the photo link array to the display function
     displayMealCatButtons(mealCatArray,mealCatPhotoLinkArray);
 }
@@ -35,7 +34,8 @@ function displayMealCatButtons(mealCatArray, mealCatPhotoLinkArray){
         
         // Create parent div for formatting images with text to display correctly
         let catBtnParent = document.createElement('div');
-        catBtnParent.setAttribute('class','col s6 m4 l3');
+        catBtnParent.setAttribute('class','mealCat col s6 m4 l3');
+        catBtnParent.setAttribute('id',`${mealCatArray[i]}`);
         catBtnParent.setAttribute('style',`padding-bottom:.5em`);
 
         // Create/add image to parent
@@ -58,3 +58,20 @@ function displayMealCatButtons(mealCatArray, mealCatPhotoLinkArray){
         }
     }
 }
+
+let mealCatSelect = [];
+
+// Event listeners based on the mealCat class that process user input
+$(document).on('click','.mealCat',function(){
+    debugger
+    // 'this' represents only the element that triggered the event, used here to save the ID
+    let elementID = $(this).attr('id');
+    // selected class adds a border for visibility
+    $(this).toggleClass('selected','');
+    // determines whether the id is already in the mealCatSelect array and if so, splice, if not, push
+    if(mealCatSelect.find(element => element == `${elementID}`)){
+        mealCatSelect.splice((mealCatSelect.findIndex(element => element == `${elementID}`)), 1)
+    } else mealCatSelect.push(`${elementID}`);
+});
+
+// Page 2 logic
