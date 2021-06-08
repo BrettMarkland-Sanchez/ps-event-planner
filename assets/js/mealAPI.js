@@ -3,6 +3,7 @@
 let mealCatURL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
 //set DOM element for meal category cards as variable
 let mealCatCard = $('#meal-categories');
+let mealCard2 = $('#mealCard2');
 //fetch data from api endpoint
 fetch(mealCatURL)
     //transform response into JSON
@@ -63,15 +64,78 @@ let mealCatSelect = [];
 
 // Event listeners based on the mealCat class that process user input
 $(document).on('click','.mealCat',function(){
-    debugger
+    
     // 'this' represents only the element that triggered the event, used here to save the ID
     let elementID = $(this).attr('id');
     // selected class adds a border for visibility
+    if(mealCatSelect.length<5 || $(this).attr('class').includes('selected')){
     $(this).toggleClass('selected','');
     // determines whether the id is already in the mealCatSelect array and if so, splice, if not, push
     if(mealCatSelect.find(element => element == `${elementID}`)){
         mealCatSelect.splice((mealCatSelect.findIndex(element => element == `${elementID}`)), 1)
     } else mealCatSelect.push(`${elementID}`);
+}
 });
 
 // Page 2 logic
+
+let mealClearBtn = $('#clearFood');
+let mealContBtn = $('#contFood');
+
+mealContBtn.on('click',contClick);
+
+function contClick(){
+    let mealsPerCat=Math.floor(10/mealCatSelect.length);
+
+    for(let i=0;i<mealCatSelect.length;i++){
+        
+        fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${mealCatSelect[i]}`)
+            .then(response=>response.json())
+            .then(data=>getAndDisplayMeals(data,mealsPerCat));
+    }
+}
+
+
+function getAndDisplayMeals(data,mealsPerCat){
+    let totalMeals = data.meals.length;
+    let mealArr =[];
+    for(let i=0;i<mealsPerCat;i++){
+        let randMeal = Math.floor(Math.random()*totalMeals);
+        mealArr.push(data.meals[randMeal]);
+    }
+
+    for(let i=0; i<mealArr.length;i++){
+        
+        // Create parent div for formatting images with text to display correctly
+        let mealCardParent = document.createElement('div');
+        mealCardParent.setAttribute('class','mealCat col s6 m4 l3');
+        mealCardParent.setAttribute('id',`${mealArr[i].strMeal}`);
+        mealCardParent.setAttribute('style',`padding-bottom:.5em`);
+
+        // Create/add image to parent
+        let mealImg = document.createElement('img');
+        mealImg.src = mealArr[i].strMealThumb;
+        mealImg.setAttribute('style',`background:${mealArr[i].strMealThumb}; width:120px; height:100px`);
+        mealCardParent.append(mealImg);
+
+        // Create/add text to parent
+        let mealText = document.createElement('p');
+        mealText.innerText = `${mealArr[i].strMeal}`;
+        mealCardParent.append(mealText);
+
+        // Add parent to card
+        mealCard2.append(mealCardParent);
+        
+
+        // Inserts a row at the end to complete card section
+        if(i == mealArr.length-1){
+            mealCard2.append(`<div class='row'></div>`);
+        }
+
+        mealCatCard.attr('class','section card-action hide');
+        mealCard2.attr('class','section card-action');
+        console.log('ok')
+    }
+
+
+}
