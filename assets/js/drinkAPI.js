@@ -23,11 +23,18 @@ fetch(drinkCatURL+`${chosenIngredient}`)
     //create array for category names and image links
     let drinkCatArray = [];
     let drinkCatPhotoLinkArray = [];
+
+    //manages IDs for drinks found in API query
+    let drinkCatIdDrinkArray = [];
     //for each category returned from the API, store the name in drinkCatArray
     //and store the photo link in drinkCatPhotoLinkArray
     for(let i=0;i<data.categories.length;i++){
+        // Drink Name
         drinkCatArray.push(data.categories[i].strDrink);
+        // Drink Image
         drinkCatPhotoLinkArray.push(data.categories[i].strDrinkThumb);
+        // Drink ID that can be pushed to the 'lookup details' for the api ----we can push to www.thecocktaildb.com/api/json/v1/1/lookup.php?i=[]
+        drinkCatIdDrinkArray.push(data.categories[i].idDrink);
     }
 
     

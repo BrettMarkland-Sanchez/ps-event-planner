@@ -73,3 +73,5 @@ $(document).on('click','.mealCat',function(){
         mealCatSelect.splice((mealCatSelect.findIndex(element => element == `${elementID}`)), 1)
     } else mealCatSelect.push(`${elementID}`);
 });
+
+// Page 2 logic
