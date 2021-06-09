@@ -15,7 +15,7 @@
     <title>Power Station Event Wizard</title>
 
 
- 
+
 </head>
 
 <body class="container">
@@ -139,16 +139,96 @@
                     <div id="music" class="card cyan darken-3">
                         <div class="card-content white-text">
                             <span class="card-title">Music</span>
-                            <p>For playlist recommendations, please enter a few keywords:</p>
-
+                            <p id="music-instructions">For playlist recommendations, please enter a few keywords:</p>
                         </div>
                         <div id="music-card" class="card-action">
                             <textarea id="playlist-keywords" class="center-align"
                                 placeholder="Playlist Keywords"></textarea>
                         </div>
+
+                        <div id="music-card-content" class="row hide">
+
+                            <!-- <div class="col s6 m6 l3">
+                                <div class="card hoverable">
+                                    <div class="card-image waves-effect waves-block waves-light">
+                                        <img class="activator" src="https://via.placeholder.com/1000" />
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title<i
+                                                class="material-icons right">more_vert</i></span>
+                                    </div>
+
+                                    <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title<i
+                                                class="material-icons right">close</i></span>
+                                        <ol>
+                                            <li>First track</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col s6 m6 l3">
+                                <div class="card hoverable">
+                                    <div class="card-image waves-effect waves-block waves-light">
+                                        <img class="activator" src="https://via.placeholder.com/1000" />
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title<i
+                                                class="material-icons right">more_vert</i></span>
+                                    </div>
+                                    <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title<i
+                                                class="material-icons right">close</i></span>
+                                        <ol>
+                                            <li>First track</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s6 m6 l3">
+                                <div class="card hoverable">
+                                    <div class="card-image waves-effect waves-block waves-light">
+                                        <img class="activator" src="https://via.placeholder.com/1000" />
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title<i
+                                                class="material-icons right">more_vert</i></span>
+                                    </div>
+                                    <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title<i
+                                                class="material-icons right">close</i></span>
+                                        <ol>
+                                            <li>First track</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s6 m6 l3">
+                                <div class="card hoverable">
+                                    <div class="card-image waves-effect waves-block waves-light">
+                                        <img class="activator" src="https://via.placeholder.com/1000" />
+                                    </div>
+                                    <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title<i
+                                                class="material-icons right">more_vert</i></span>
+                                    </div>
+                                    <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title<i
+                                                class="material-icons right">close</i></span>
+                                        <ol>
+                                            <li>First track</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+
+
+
                         <div>
-                            <button class="btn waves-effect waves-light blue">Clear</button>
-                            <button id="music-continue-btn" class="btn waves-effect waves-light blue">Continue</button>
+                            <button id ="clearMusic" class="btn waves-effect waves-light blue">Clear</button>
+                            <button id="contMusic" class="btn waves-effect waves-light blue">Continue</button>
                         </div>
                     </div>
                 </div>
@@ -165,7 +245,7 @@
                     <h4>My Saved Events</h4>
                     <h5 id="saved-event-instructions">Select a previously saved event and click load to view it!</h5>
                     <div id="saved-event-container">
-             
+
 
                     </div>
 
@@ -174,17 +254,17 @@
         </div>
     </main>
 
-    
-   <!-- Materialize compiled and minified JavaScript -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-   <!-- jQuery -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   <!-- Our script files -->
-   <script src="./assets/js/script.js"></script>
-   <script src="./assets/js/mealAPI.js"></script>
-   <script src="./assets/js/drinkAPI.js"></script>
-   <script src="./assets/js/musicAPI.js"></script>
-   <script src="./assets/js/saveLogicAPI.js"></script>
+
+    <!-- Materialize compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Our script files -->
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/mealAPI.js"></script>
+    <script src="./assets/js/drinkAPI.js"></script>
+    <script src="./assets/js/musicAPI.js"></script>
+    <script src="./assets/js/saveLogicAPI.js"></script>
 </body>
 
 </html>
