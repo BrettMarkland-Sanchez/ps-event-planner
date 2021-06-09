@@ -16,10 +16,12 @@ let drinkPreference;
 // Progresses the view for the drink card
 contDrink.click(function(){
     drinkPreference = $('input[name="group1"]:checked').val();
-    getAPI(drinkPreference);
-    drinkCard1.addClass('hide');
-    drinkCard2.removeClass('hide');
-    contDrink.prop("disabled", true);
+    if(drinkPreference){
+        getAPI(drinkPreference);
+        drinkCard1.addClass('hide');
+        drinkCard2.removeClass('hide');
+        contDrink.prop("disabled", true);
+    }
 })
 
 // Clears user input and resets card view
@@ -104,10 +106,6 @@ function displayDrinks(drinkCatArray, drinkCatPhotoLinkArray){
         // Add parent to card
         drinkCard2.append(catBtnParent);
 
-        // Inserts a row at the end to complete card section
-        if(i == drinkCatArray.length-1){
-            drinkCard2.append(`<div class='row'></div>`);
-        }
     }
 }
 
