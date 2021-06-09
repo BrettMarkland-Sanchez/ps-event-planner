@@ -111,8 +111,10 @@ saveBtn.on('click',saveEvent);
 
 function saveEvent(){
 
-    let bodyEl = $('body');
-    let bodyElToText = bodyEl.html();
+    let mainEl = $('main');
+
+
+    let mainElToText = mainEl.html();
     let eventName = $('#eventName').text();
 
     let eventNamesArr =[];
@@ -123,7 +125,7 @@ function saveEvent(){
     }
 
     eventNamesArr.push(eventName);
-    eventDetailsArr.push(bodyElToText);
+    eventDetailsArr.push(mainElToText);
 
     localStorage.setItem('savedEventNames',JSON.stringify(eventNamesArr));
     localStorage.setItem('savedEventDetails',JSON.stringify(eventDetailsArr));
@@ -191,13 +193,66 @@ function loadEvent(){
     let eventNameArr = JSON.parse(localStorage.getItem('savedEventNames'));
     let eventDetailArr = JSON.parse(localStorage.getItem('savedEventDetails'));
     let eventIndex=eventNameArr.indexOf(eventName);
-    let bodyText = eventDetailArr[eventIndex];
-    let bodyEl = $('body');
-    bodyEl.html('');
-    bodyEl.html(bodyText);
+    let mainText = eventDetailArr[eventIndex];
+    let mainEl = $('main');
+    mainEl.html('');
+
+    mainEl.html(mainText);
+
+    newEvent = $('#new');
+    newEvent.text("Start Over");
+    savedEvents = $('#saved');
+    planner = $('#planner');
+    
+    mealClearBtn = $('#clearFood');
+    mealContBtn = $('#contFood');
+
+    drinkClearBtn = $('#clearDrink');
+    drinkContBtn = $('#contDrink');
+
+    musicClearBtn = $('#clearMusic');
+    musicContBtn = $('#contMusic');
+
+    resetBtn = $('#resetBtn');
+    saveBtn = $('#saveBtn');
+
+    mealClearBtn.addClass('hide');
+    mealContBtn.addClass('hide');
+    drinkClearBtn.addClass('hide');
+    drinkContBtn.addClass('hide');
+    musicClearBtn.addClass('hide');
+    musicContBtn.addClass('hide');
+    resetBtn.addClass('hide');
+    saveBtn.addClass('hide')
+    savedEvents.addClass('hide');
+    $('#myEvent').addClass('hide');
+    
+
+
+    newLink.click(function(){
+        location.reload();
+        planner.addClass('hide');
+        savedEvents.addClass('hide');
+        newEvent.removeClass('hide');
+    })
+    
+    myEventLink.click(function(){
+        location.reload();
+        newEvent.addClass('hide');
+        savedEvents.addClass('hide');
+        planner.removeClass('hide');
+    })
+    
+    savedEventsLink.click(function(){
+        location.reload();
+        // newEvent.addClass('hide');
+        // planner.addClass('hide');
+        // savedEvents.removeClass('hide');
+        loadSavePage();
+    })
     
 }
 
 // let eventDetails = JSON.parse(localStorage.getItem('savedEventDetails'));
 //     let eventDetail = eventDetails[number];
-//     $('body').html(eventDetail);
+//     $('main').html(eventDetail);
