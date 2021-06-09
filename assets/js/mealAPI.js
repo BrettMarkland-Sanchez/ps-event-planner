@@ -19,12 +19,17 @@ fetch(mealCatURL)
     //for each category returned from the API, store the name in mealCatArray
     //and store the photo link in mealCatPhotoLinkArray
     for(let i=0;i<data.categories.length;i++){
+        if(data.categories[i].strCategory==='Goat'){
+        } else if(data.categories[i].strCategory==='Vegan'){
+        } else {
         mealCatArray.push(data.categories[i].strCategory);
         if(data.categories[i].strCategory == 'Chicken'){
             mealCatPhotoLinkArray.push('https://www.themealdb.com/images/ingredients/Chicken.png');
-        }else
-        mealCatPhotoLinkArray.push(data.categories[i].strCategoryThumb);
+        }
+        else mealCatPhotoLinkArray.push(data.categories[i].strCategoryThumb);
     }
+
+}
     //pass the name array and the photo link array to the display function
     displayMealCatButtons(mealCatArray,mealCatPhotoLinkArray);
 }
@@ -83,32 +88,60 @@ let mealClearBtn = $('#clearFood');
 let mealContBtn = $('#contFood');
 
 mealContBtn.on('click',contClick);
+mealClearBtn.on('click',clearClick);
+
 
 function contClick(){
-    let mealsPerCat=Math.floor(10/mealCatSelect.length);
-
+    let totalCat = mealCatSelect.length;
+    let mealsPerCat = 4;
+   
     for(let i=0;i<mealCatSelect.length;i++){
+
         
         fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${mealCatSelect[i]}`)
             .then(response=>response.json())
             .then(data=>getAndDisplayMeals(data,mealsPerCat));
     }
+
+    mealContBtn.addClass('disabled');
 }
+
+function clearClick(){
+    console.log('test')
+    mealCatCard.attr('class','section card-action center-align');
+    mealCard2.attr('class','section card-action center-align hide');
+    mealCatSelect =[];
+    $('.selected').removeClass('selected');
+    mealCard2.html(' ');
+
+    mealContBtn.removeClass('disabled');
+
+
+}
+
+
 
 
 function getAndDisplayMeals(data,mealsPerCat){
     let totalMeals = data.meals.length;
+    if(totalMeals<mealsPerCat){
+        mealsPerCat = totalMeals;
+    }
     let mealArr =[];
     for(let i=0;i<mealsPerCat;i++){
         let randMeal = Math.floor(Math.random()*totalMeals);
+        if(mealArr.includes(data.meals[randMeal])){
+            i--;
+        } else {
         mealArr.push(data.meals[randMeal]);
+        }
     }
 
     for(let i=0; i<mealArr.length;i++){
         
         // Create parent div for formatting images with text to display correctly
         let mealCardParent = document.createElement('div');
-        mealCardParent.setAttribute('class','mealCat col s6 m4 l3');
+        mealCardParent.setAttribute('class','mealCard col s6 m4 l3');
         mealCardParent.setAttribute('id',`${mealArr[i].strMeal}`);
         mealCardParent.setAttribute('style',`padding-bottom:.5em`);
 
@@ -132,10 +165,17 @@ function getAndDisplayMeals(data,mealsPerCat){
             mealCard2.append(`<div class='row'></div>`);
         }
 
-        mealCatCard.attr('class','section card-action hide');
-        mealCard2.attr('class','section card-action');
-        console.log('ok')
+        if(mealCatSelect.length===1){
+            $('#food-instructions').text('Here are a few ideas for the category you selected!')
+
+        } else {
+        $('#food-instructions').text('Here are a few ideas for each of the categories you selected!')
+        }
+        mealCatCard.attr('class','section card-action center-align hide');
+        mealCard2.attr('class','section card-action center-align');
+
     }
 
 
 }
+
