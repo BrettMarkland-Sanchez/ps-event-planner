@@ -1,23 +1,30 @@
-//Meal API
+//Meal API Using MealDB API
 //set api endpoint url as variable
 let mealCatURL = 'https://www.themealdb.com/api/json/v1/1/categories.php';
-//set DOM element for meal category cards as variable
-let mealCatCard = $('#meal-categories');
-let mealCard2 = $('#mealCard2');
+
+    //set DOM element for meal category cards as variable
+    let mealCatCard = $('#meal-categories');
+    let mealCard2 = $('#mealCard2');
+
 //fetch data from api endpoint
 fetch(mealCatURL)
-    //transform response into JSON
+
+//transform response into JSON
     .then(response => response.json())
-    //pass JSON data into fillMealCatArray function
+
+//pass JSON data into fillMealCatArray function
     .then(data => fillMealCatArray(data));
-    //this function reads thru the api data and creates an array of categories and an array
-    //of the photo links for each category
+
+/*this function reads thru the api data and creates an array of categories and an array
+of the photo links for each category*/
     function fillMealCatArray(data){
-    //create array for category names and image links
+
+//create array for category names and image links
     let mealCatArray = [];
     let mealCatPhotoLinkArray =[];
-    //for each category returned from the API, store the name in mealCatArray
-    //and store the photo link in mealCatPhotoLinkArray
+
+/*for each category returned from the API, store the name in mealCatArray
+and store the photo link in mealCatPhotoLinkArray*/
     for(let i=0;i<data.categories.length;i++){
         if(data.categories[i].strCategory==='Goat'){
         } else if(data.categories[i].strCategory==='Vegan'){
@@ -28,37 +35,37 @@ fetch(mealCatURL)
         }
         else mealCatPhotoLinkArray.push(data.categories[i].strCategoryThumb);
     }
-
 }
-    //pass the name array and the photo link array to the display function
+//PASS the name array and the photo link array to the display function
     displayMealCatButtons(mealCatArray,mealCatPhotoLinkArray);
 }
-//this function displays the categories by creating elements, filling them
+
+//this FUNCTION displays the categories by CREATING elements, filling them
 //with the array data, and then appending them to the meal category card
-function displayMealCatButtons(mealCatArray, mealCatPhotoLinkArray){
+    function displayMealCatButtons(mealCatArray, mealCatPhotoLinkArray){
     for(let i=0; i<mealCatArray.length;i++){
         
-        // Create parent div for formatting images with text to display correctly
+// Create parent div for formatting images with text to display correctly
         let catBtnParent = document.createElement('div');
         catBtnParent.setAttribute('class','mealCat col s6 m4 l3');
         catBtnParent.setAttribute('id',`${mealCatArray[i]}`);
         catBtnParent.setAttribute('style',`padding-bottom:.5em`);
 
-        // Create/add image to parent
+// Create/add image to parent
         let catBtn = document.createElement('img');
         catBtn.src = mealCatPhotoLinkArray[i];
         catBtn.setAttribute('style',`background:${mealCatPhotoLinkArray[i]}; width:120px; height:100px`);
         catBtnParent.append(catBtn);
 
-        // Create/add text to parent
+// Create/add text to parent
         let catBtnText = document.createElement('p');
         catBtnText.innerText = `${mealCatArray[i]}`;
         catBtnParent.append(catBtnText);
 
-        // Add parent to card
+// Add parent to card
         mealCatCard.append(catBtnParent);
 
-        // Inserts a row at the end to complete card section
+// Inserts a row at the end to complete card section
         if(i == mealCatArray.length-1){
             mealCatCard.append(`<div class='row'></div>`);
         }
@@ -107,7 +114,6 @@ function contClick(){
 }
 
 function clearClick(){
-    console.log('test')
     mealCatCard.attr('class','section card-action center-align');
     mealCard2.attr('class','section card-action center-align hide');
     mealCatSelect =[];
@@ -116,11 +122,10 @@ function clearClick(){
 
     mealContBtn.removeClass('disabled');
 
+    $('#food-instructions').text('Please select up to five categories for your menu suggestions:');
+
 
 }
-
-
-
 
 function getAndDisplayMeals(data,mealsPerCat){
     let totalMeals = data.meals.length;
@@ -175,7 +180,5 @@ function getAndDisplayMeals(data,mealsPerCat){
         mealCard2.attr('class','section card-action center-align');
 
     }
-
-
 }
 

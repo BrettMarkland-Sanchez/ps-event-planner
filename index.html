@@ -143,13 +143,18 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row right-align">
+                    <button id="resetBtn" class="btn waves-effect waves-light right-align blue">Reset</button>
+                    <button id="saveBtn" class="btn waves-effect waves-light right-align blue">Save Event</button>
+                </div>
             </div>
 
             <!-- Saved Events Page -->
             <div id="savedEvents" class="hide">
                 <div class="col s12">
                     <h4>My Saved Events</h4>
-                    <h5>Select a previously saved event and click load to view it!</h5>
+                    <h5 id="saved-event-instructions">Select a previously saved event and click load to view it!</h5>
                     <div class="card cyan darken-3">
                         <div class="card-content white-text">
                             <span class="card-title">Saved Event Name</span>
