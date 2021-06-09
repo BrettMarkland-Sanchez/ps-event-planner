@@ -17,4 +17,15 @@ Users will find they are also able to save their event for later.
 **Pete Weigman**<br>
 **Virgil Pearson**<br>
 **Mason Hames**<br>
-**Brian Jones**<br>
+
+## Screenshots:
+### Homepage
+![Homepage](./assets/images/Homepage.png)
+### My Event
+![My_Event](./assets/images/My_Event.png)
+### Selection Cards
+![Selection_Cards](./assets/images/Selection_Cards.png)
+### Saved Events
+![Saved_Events](./assets/images/Saved_Events.png)
+### Lighthouse Scores
+![Lighthouse_Scores](./assets/images/Lighthouse_Scores.png)
