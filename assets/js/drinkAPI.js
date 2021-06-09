@@ -6,16 +6,22 @@ let contDrink = $('#contDrink');
 let drinkCard1 = $('#drinkCard1');
 let drinkCard2 = $('#drinkCard2');
 let drinkRadio = $('input[name="group1"]');
-
+let drinkCatCard = $('#drink-categories');
 //set api endpoint url as variable
 let drinkCatURL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=`;
 
-//set DOM element for drink category cards as variable
-let drinkCatCard = $('#drink-categories');
-//fetch data from api endpoint
-
 // Radio buttons are used to collect user input for drink selection
 // API then returns full set of results that get randomly selected for the user
+
+// Progresses the view for the drink card
+contDrink.click(function(){
+    drinkCard1.addClass('hide');
+    let drinkPreference = $('input[name="group1"]:checked').val();
+
+    drinkCard2.removeClass('hide');
+})
+
+// Clears user input and resets card view
 clearDrink.click(function(){
     drinkCard2.addClass('hide');
     drinkRadio[0].checked = false;
@@ -23,53 +29,78 @@ clearDrink.click(function(){
     drinkCard1.removeClass('hide');
 })
 
-$('input[name="group1"]:checked').val();
+function getAPI(drinkPreference){
+    if(drinkPreference == 'alcoholic'){
+        alcoholIngredients.forEach(element => {
+            fetch(drinkCatURL+element)
+                .then(response => response.json())
+                    .then(data => filldrinkCatArrayAlcoholic(data))
+        });
+    }else if (drinkPreference == 'non-alocoholic'){
 
-/***********************Code Ideas***************************
- * 
-fetch(drinkCatURL+`${chosenIngredient}`)
-    //transform response into JSON via .then
-    .then(response => response.json())
-    //pass JSON data into filldrinkCatArray function
-    .then(data => filldrinkCatArray(data));
+    }
+}
 
-    //this function reads thru the api data and creates an array of categories and an array
-    //of the photo links for each category
-    function filldrinkCatArray(data){
+// This function reads thru the api data and creates an array of categories
+// and an array of the photo links for each category
+function filldrinkCatArrayAlocoholic(data){
+    
     //create array for category names and image links
     let drinkCatArray = [];
     let drinkCatPhotoLinkArray = [];
-
+    
     //manages IDs for drinks found in API query
     let drinkCatIdDrinkArray = [];
+    
     //for each category returned from the API, store the name in drinkCatArray
     //and store the photo link in drinkCatPhotoLinkArray
-    for(let i=0;i<data.categories.length;i++){
+    for(let i=0;i<=5;i++){
+        
         // Drink Name
         drinkCatArray.push(data.categories[i].strDrink);
+        
         // Drink Image
         drinkCatPhotoLinkArray.push(data.categories[i].strDrinkThumb);
+        
         // Drink ID that can be pushed to the 'lookup details' for the api ----we can push to www.thecocktaildb.com/api/json/v1/1/lookup.php?i=[]
         drinkCatIdDrinkArray.push(data.categories[i].idDrink);
     }
-
-    
-//pass the name array and the photo link array to the display function
+    //pass the name array and the photo link array to the display function
     displaydrinkCatButtons(drinkCatArray,drinkCatPhotoLinkArray);
 }
 
 //this function displays the categories by creating elements, filling them
-//with the array data, and then appending them to the drink category card
+//with the array data, and then appending them to the drink-categories card
 function displaydrinkCatButtons(drinkCatArray, drinkCatPhotoLinkArray){
     for(let i=0; i<drinkCatArray.length;i++){
-        let catBtn = document.createElement('input');
-        catBtn.type = 'image';
-        catBtn.src = drinkCatPhotoLinkArray[i]
-        catBtn.setAttribute('style',`background:${drinkCatPhotoLinkArray[i]}`);
+        
+        // Create parent div for formatting images with text to display correctly
+        let catBtnParent = document.createElement('div');
+        catBtnParent.setAttribute('class','col s6 m4 l3');
+        catBtnParent.setAttribute('id',`${drinkCatArray[i]}`);
+        catBtnParent.setAttribute('style',`padding-bottom:.5em`);
 
-        drinkCatCard.append(catBtn);
+        // Create/add image to parent
+        let catBtn = document.createElement('img');
+        catBtn.src = drinkCatPhotoLinkArray[i];
+        catBtn.setAttribute('style',`background:${drinkCatPhotoLinkArray[i]}; width:120px; height:100px`);
+        catBtnParent.append(catBtn);
+
+        // Create/add text to parent
+        let catBtnText = document.createElement('p');
+        catBtnText.innerText = `${drinkCatArray[i]}`;
+        catBtnParent.append(catBtnText);
+
+        // Add parent to card
+        drinkCatCard.append(catBtnParent);
+
+        // Inserts a row at the end to complete card section
+        if(i == drinkCatArray.length-1){
+            drinkCatCard.append(`<div class='row'></div>`);
+        }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
 // First Prompt: Alcoholic(Continue the prompt to pre selected ingredients) or
 // Non-Alcoholic(End questions and pull 4-6 drinks from "www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic")
@@ -96,5 +127,3 @@ function displaydrinkCatButtons(drinkCatArray, drinkCatPhotoLinkArray){
 //    return newArr;
 //  }
 //  console.log(randomSelection(5));
-*
-********************************************************/
