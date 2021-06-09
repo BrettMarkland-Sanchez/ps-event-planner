@@ -44,9 +44,10 @@ myEventLink.click(function(){
 })
 
 savedEventsLink.click(function(){
-    newEvent.addClass('hide');
-    planner.addClass('hide');
-    savedEvents.removeClass('hide');
+    // newEvent.addClass('hide');
+    // planner.addClass('hide');
+    // savedEvents.removeClass('hide');
+    loadSavePage();
 })
 
 clearNew.click(function(){
@@ -116,7 +117,7 @@ function saveEvent(){
 
     let eventNamesArr =[];
     let eventDetailsArr=[];
-    if(!localStorage.getItem('savedEventNames')){
+    if(localStorage.getItem('savedEventNames')){
      eventNamesArr = JSON.parse(localStorage.getItem('savedEventNames'));
      eventDetailsArr = JSON.parse(localStorage.getItem('savedEventDetails'));
     }
@@ -135,11 +136,18 @@ function saveEvent(){
 
 function loadSavePage(){
 
-    let saveInstr = $('saved-event-instructions');
+    let saveInstr = document.getElementById('saved-event-instructions');
     if(!localStorage.getItem('savedEventNames')){
-        saveInstr.text('There are no saved events!');
+        newEvent.addClass('hide');
+    planner.addClass('hide');
+    savedEvents.removeClass('hide');
+        saveInstr.innerText='There are no saved events!';
         return;
     }
+
+    saveInstr.innerText='Select a previously saved event and click load to view it!';
+
+    document.getElementById('saved-event-container').innerHTML ='';
 
     let eventNamesArr = JSON.parse(localStorage.getItem('savedEventNames'));
 
@@ -150,5 +158,46 @@ function loadSavePage(){
 }
 
 function displayEventCard(eventName, number){
+    let cardDiv = document.createElement('div');
+    let cardContentDiv = document.createElement('div');
+    let eventHeader = document.createElement('h3');
+    let loadBtn = document.createElement('btn');
+
+    cardDiv.className='card cyan darken-3';
+    cardContentDiv.className='card-content white-text';
+    eventHeader.className='center-align';
+    loadBtn.className='btn waves-effect waves-light blue load-btn-custom';
+
+    eventHeader.innerText=eventName;
+    loadBtn.innerText='Load';
+    loadBtn.id=eventName;
+
+    cardContentDiv.appendChild(eventHeader);
+    cardContentDiv.appendChild(loadBtn);
+    cardDiv.appendChild(cardContentDiv);
+
+    document.getElementById('saved-event-container').appendChild(cardDiv);
+    newEvent.addClass('hide');
+    planner.addClass('hide');
+    savedEvents.removeClass('hide');
+
+}
+
+
+$(document).on('click','.load-btn-custom',loadEvent);
+
+function loadEvent(){
+    let eventName = $(this).attr('id');
+    let eventNameArr = JSON.parse(localStorage.getItem('savedEventNames'));
+    let eventDetailArr = JSON.parse(localStorage.getItem('savedEventDetails'));
+    let eventIndex=eventNameArr.indexOf(eventName);
+    let bodyText = eventDetailArr[eventIndex];
+    let bodyEl = $('body');
+    bodyEl.html('');
+    bodyEl.html(bodyText);
     
 }
+
+// let eventDetails = JSON.parse(localStorage.getItem('savedEventDetails'));
+//     let eventDetail = eventDetails[number];
+//     $('body').html(eventDetail);

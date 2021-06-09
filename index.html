@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,14 +13,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Power Station Event Wizard</title>
+
+
+ 
 </head>
+
 <body class="container">
 
     <div class="col valign-wrapper mid-height">
         <!-- Materialize Table of Contents -->
         <div class="col">
             <div class="toc-wrapper">
-                <div style="height: 1px;"> 
+                <div style="height: 1px;">
                     <ul class="section table-of-contents">
                         <li>
                             <a id="new" href="#">New Event</a>
@@ -53,7 +58,7 @@
             <!-- Website Title -->
             <div class="row title center-align">
                 <h1>
-                    Team PowerStation <br> Event Planner                
+                    Team PowerStation <br> Event Planner
                 </h1>
             </div>
 
@@ -77,38 +82,40 @@
                         <div id="mealCard1">
                             <div class="card-content white-text">
                                 <span class="card-title">Food</span>
-                                <p id="food-instructions">Please select up to five categories for your menu suggestions:</p>
+                                <p id="food-instructions">Please select up to five categories for your menu suggestions:
+                                </p>
                             </div>
                             <div id="meal-categories" class="section card-action center-align"></div>
                             <div id="mealCard2" class="section card-action center-align hide"></div>
 
                             <div>
-                                <button id = "clearFood" class="btn waves-effect waves-light blue">Clear</button>
-                                <button id = "contFood" class="btn waves-effect waves-light blue">Continue</button>
+                                <button id="clearFood" class="btn waves-effect waves-light blue">Clear</button>
+                                <button id="contFood" class="btn waves-effect waves-light blue">Continue</button>
                             </div>
                         </div>
- 
+
                     </div>
                 </div>
                 <div class="col s12">
                     <div id="drinks" class="card cyan darken-3">
                         <div class="card-content white-text">
                             <span class="card-title">Drinks</span>
-                            <p id="drink-instructions">Please select a drink preference to receive your menu suggestions:</p>
+                            <p id="drink-instructions">Please select a drink preference to receive your menu
+                                suggestions:</p>
                         </div>
                         <div id="drinkCard1">
                             <form action="#">
                                 <p>
-                                  <label>
-                                    <input name="group1" type="radio" value="Alcoholic"/>
-                                    <span>Alcoholic</span>
-                                  </label>
+                                    <label>
+                                        <input name="group1" type="radio" value="Alcoholic" />
+                                        <span>Alcoholic</span>
+                                    </label>
                                 </p>
                                 <div class="row"></div>
                                 <p>
                                     <label>
-                                      <input name="group1" type="radio" value="Non_Alcoholic"/>
-                                      <span>Non-alcoholic</span>
+                                        <input name="group1" type="radio" value="Non_Alcoholic" />
+                                        <span>Non-alcoholic</span>
                                     </label>
                                 </p>
                                 <div class="row"></div>
@@ -135,8 +142,9 @@
                             <p>For playlist recommendations, please enter a few keywords:</p>
 
                         </div>
-                        <div id="music-card"class="card-action">
-                            <textarea id="playlist-keywords" class="center-align" placeholder="Playlist Keywords"></textarea>
+                        <div id="music-card" class="card-action">
+                            <textarea id="playlist-keywords" class="center-align"
+                                placeholder="Playlist Keywords"></textarea>
                         </div>
                         <div>
                             <button class="btn waves-effect waves-light blue">Clear</button>
@@ -156,33 +164,27 @@
                 <div class="col s12">
                     <h4>My Saved Events</h4>
                     <h5 id="saved-event-instructions">Select a previously saved event and click load to view it!</h5>
-                    <div class="card cyan darken-3">
-                        <div class="card-content white-text">
-                            <span class="card-title">Saved Event Name</span>
-                            <h3 id = "savedEventFood">Food:</h3>
-                            <h3 id = "savedEventDrinks">Drinks:</h3>
-                            <h3 id = "savedEventMusic">Music:</h3>
-                        </div>
-                        <div id = "savedEventDetails" class="card-action"></div>
-                        <div>
-                            <button class="btn waves-effect waves-light blue">Load</button>
-                        </div>
+                    <div id="saved-event-container">
+             
+
                     </div>
+
                 </div>
             </div>
-        </div> 
+        </div>
     </main>
 
-    <!-- Materialize compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Our script files -->
-    <script src="./assets/js/script.js"></script>
-    <script src="./assets/js/mealAPI.js"></script>
-    <script src="./assets/js/drinkAPI.js"></script>
-    <script src="./assets/js/musicAPI.js"></script>
-    <script src="./assets/js/saveLogicAPI.js"></script>
-
+    
+   <!-- Materialize compiled and minified JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- jQuery -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <!-- Our script files -->
+   <script src="./assets/js/script.js"></script>
+   <script src="./assets/js/mealAPI.js"></script>
+   <script src="./assets/js/drinkAPI.js"></script>
+   <script src="./assets/js/musicAPI.js"></script>
+   <script src="./assets/js/saveLogicAPI.js"></script>
 </body>
+
 </html>
