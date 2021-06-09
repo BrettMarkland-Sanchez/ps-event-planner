@@ -93,7 +93,7 @@ function displayPlaylists(result){
         playlistImgArr.push(result.playlists.items[i].images[0].url);
 
         let playlistDiv = document.createElement('div');
-        playlistDiv.className = 'col s12 m4 l4';
+        playlistDiv.className = 'col s12 m6 l4';
         document.getElementById('music-card-content').appendChild(playlistDiv);
 
         let plCard =document.createElement('div');

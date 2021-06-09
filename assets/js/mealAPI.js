@@ -99,18 +99,18 @@ mealClearBtn.on('click',clearClick);
 
 
 function contClick(){
-    let totalCat = mealCatSelect.length;
-    let mealsPerCat = 4;
+    if(mealCatSelect.length){
+        let totalCat = mealCatSelect.length;
+        let mealsPerCat = 4;
    
-    for(let i=0;i<mealCatSelect.length;i++){
+        for(let i=0;i<mealCatSelect.length;i++){
 
-        
         fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${mealCatSelect[i]}`)
             .then(response=>response.json())
             .then(data=>getAndDisplayMeals(data,mealsPerCat));
     }
-
     mealContBtn.addClass('disabled');
+    }
 }
 
 function clearClick(){
@@ -163,12 +163,6 @@ function getAndDisplayMeals(data,mealsPerCat){
 
         // Add parent to card
         mealCard2.append(mealCardParent);
-        
-
-        // Inserts a row at the end to complete card section
-        if(i == mealArr.length-1){
-            mealCard2.append(`<div class='row'></div>`);
-        }
 
         if(mealCatSelect.length===1){
             $('#food-instructions').text('Here are a few ideas for the category you selected!')
@@ -177,7 +171,7 @@ function getAndDisplayMeals(data,mealsPerCat){
         $('#food-instructions').text('Here are a few ideas for each of the categories you selected!')
         }
         mealCatCard.attr('class','section card-action center-align hide');
-        mealCard2.attr('class','section card-action center-align');
+        mealCard2.attr('class','row section card-action center-align');
 
     }
 }
