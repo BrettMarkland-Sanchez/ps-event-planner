@@ -55,6 +55,7 @@ clearNew.click(function(){
 })
 
 contNew.click(function(){
+    resetEvent();
     myEventName = newEventName.val();
     nameMyEvent(myEventName);
 })
@@ -88,6 +89,8 @@ function resetEvent() {
     let mealCatCard = $('#meal-categories');
     let mealCard2 = $('#mealCard2');
 
+    $('#food-instructions').text('Please select up to five categories for your menu suggestions:');
+
     mealCatCard.attr('class','section card-action center-align');
     mealCard2.attr('class','section card-action center-align hide');
     if (mealCatSelect) {
@@ -98,6 +101,28 @@ function resetEvent() {
 
     mealContBtn.removeClass('disabled');
 
+    //the following code clears the drink card
+    let drinkCard1 = $('#drinkCard1');
+    let drinkCard2 = $('#drinkCard2');
+    let drinkRadio = $('input[name="group1"]');
+    drinkCard2.html('');
+    drinkCard2.addClass('hide');
+    drinkRadio[0].checked = false;
+    drinkRadio[1].checked = false;
+    drinkInstructions.text('Please select a drink preference to receive your menu suggestions:')
+    drinkCard1.removeClass('hide');
+    contDrink.prop("disabled", false);
+
+    //the following code clears the music card
+    $('#music-card').removeClass('hide');
+    $('#music-card-content').addClass('hide');
+
+    $('#music-card-content').html('');
+
+    $('#music-instructions').text('For playlist recommendations, please enter a few keywords:');
+    $('#playlist-keywords').val('');
+
+    $('#contMusic').removeClass('disabled');
 
 
 

@@ -1,5 +1,5 @@
 let playlistKeywordsArea = document.getElementById('playlist-keywords');
-let musicContinue = document.getElementById('music-continue-btn');
+let musicContinue = document.getElementById('contMusic');
 
 let client_id = '76df893ec1954a35913752b0bf902564';
 let client_secret = '3f2775f60e934f7eb0fc83f3c7d2f497';
@@ -44,7 +44,7 @@ function getPlaylists(keywords,results) {
     access_token = results.access_token;
     token_type = results.token_type;
 
-    const playlistURL = `https://api.spotify.com/v1/search?q=${searchQuery}&type=playlist&market=US&limit=4`;
+    const playlistURL = `https://api.spotify.com/v1/search?q=${searchQuery}&type=playlist&market=US&limit=3`;
 
 
     let mySearchHeaders = new Headers();
@@ -68,7 +68,6 @@ function getPlaylists(keywords,results) {
 
 function displayPlaylists(result){
     console.log(result.playlists.items);
-    document.getElementById('music-card').innerText='';
     let playlistNameArr = [];
     let playlistImgArr =[];
     //let playlistTracksArr =[];
@@ -84,37 +83,49 @@ function displayPlaylists(result){
     //     redirect:'follow'
     // };
 
+    $('#music-card').addClass('hide');
+    $('#music-card-content').removeClass('hide');
+    $('#music-instructions').text('Here are a few playlists you might enjoy!');
+    $('#contMusic').addClass('disabled');
+
     for(let i=0; i<result.playlists.items.length;i++){
         playlistNameArr.push(result.playlists.items[i].name);
         playlistImgArr.push(result.playlists.items[i].images[0].url);
 
         let playlistDiv = document.createElement('div');
-        playlistDiv.className = 'card';
-        playlistDiv.setAttribute('style','width:40%;float:left;margin:20px;margin-left:40px;background-color:#4abdac;');
+        playlistDiv.className = 'col s12 m4 l4';
+        document.getElementById('music-card-content').appendChild(playlistDiv);
+
+        let plCard =document.createElement('div');
+        plCard.className = 'card hoverable'
+        playlistDiv.appendChild(plCard);
+    
+        let playlistCardDiv = document.createElement('div');
+        playlistCardDiv.className = 'card small';
+        plCard.appendChild(playlistCardDiv);
+
 
         let playlistImgDiv = document.createElement('div');
         playlistImgDiv.className = 'card-image waves-effect waves-block waves-light';
-        playlistImgDiv.setAttribute('style','height:100%;width:100%;')
-        playlistDiv.appendChild(playlistImgDiv);
-
-        let playlistImg = document.createElement('img');
-        playlistImg.class = 'activator';
-        playlistImg.src = result.playlists.items[i].images[0].url;
-        playlistImg.setAttribute('style','height:100%;width:100%');
-        playlistImgDiv.appendChild(playlistImg);
+        playlistCardDiv.appendChild(playlistImgDiv);
+        
+        let plImage = document.createElement('img');
+        plImage.className = 'activator';
+        plImage.src = result.playlists.items[i].images[0].url;
+        playlistImgDiv.appendChild(plImage);
 
         let playlistContentCard = document.createElement('div');
         playlistContentCard.className = 'card-content';
-        playlistDiv.appendChild(playlistContentCard);
+        playlistCardDiv.appendChild(playlistContentCard);
 
         let titleSpan = document.createElement('span');
-        titleSpan.className = 'card-title center-align activator grey-text text-darken-4';
+        titleSpan.className = 'card-title activator grey-text text-darken-4';
         titleSpan.innerHTML = result.playlists.items[i].name + '<i class=\'material-icons right\'>more_vert</i>';
         playlistContentCard.appendChild(titleSpan);
 
         let trackDiv = document.createElement('div');
         trackDiv.className = 'card-reveal';
-        playlistDiv.appendChild(trackDiv);
+        playlistCardDiv.appendChild(trackDiv);
 
         let revealSpan = document.createElement('span');
         revealSpan.className = 'card-title grey-text text-darken-4';
@@ -127,7 +138,7 @@ function displayPlaylists(result){
         getTrackList(result.playlists.items[i]).then(data=>createSampleTrackList(data,i));
 
 
-        document.getElementById('music-card').appendChild(playlistDiv);
+        //document.getElementById('music-card').appendChild(playlistDiv);
 
 
 
@@ -182,5 +193,24 @@ function createSampleTrackList(data,playlistNum){
     }
     
     
+
+}
+
+
+
+let musicClearBtn = $('#clearMusic');
+
+musicClearBtn.on('click',clearMusicClick);
+
+function clearMusicClick() {
+    $('#music-card').removeClass('hide');
+    $('#music-card-content').addClass('hide');
+
+    $('#music-card-content').html('');
+
+    $('#music-instructions').text('For playlist recommendations, please enter a few keywords:');
+    playlistKeywordsArea.value = '';
+
+    $('#contMusic').removeClass('disabled');
 
 }
