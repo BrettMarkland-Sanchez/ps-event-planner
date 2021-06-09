@@ -163,12 +163,6 @@ function getAndDisplayMeals(data,mealsPerCat){
 
         // Add parent to card
         mealCard2.append(mealCardParent);
-        
-
-        // Inserts a row at the end to complete card section
-        if(i == mealArr.length-1){
-            mealCard2.append(`<div class='row'></div>`);
-        }
 
         if(mealCatSelect.length===1){
             $('#food-instructions').text('Here are a few ideas for the category you selected!')
