@@ -1,79 +1,89 @@
 //Drink API
-let chosenIngredient;
-let alcoholIngredients = ['rum', 'vodka', 'bourbon', 'gin', 'tequila'];
 let clearDrink = $('#clearDrink');
 let contDrink = $('#contDrink');
 let drinkCard1 = $('#drinkCard1');
 let drinkCard2 = $('#drinkCard2');
 let drinkRadio = $('input[name="group1"]');
-let drinkCatCard = $('#drink-categories');
+let drinkInstructions = $('#drink-instructions');
 //set api endpoint url as variable
-let drinkCatURL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=`;
+let drinkCatURL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=`;
+
+let drinkPreference;
 
 // Radio buttons are used to collect user input for drink selection
 // API then returns full set of results that get randomly selected for the user
 
 // Progresses the view for the drink card
 contDrink.click(function(){
+    drinkPreference = $('input[name="group1"]:checked').val();
+    getAPI(drinkPreference);
     drinkCard1.addClass('hide');
-    let drinkPreference = $('input[name="group1"]:checked').val();
-
     drinkCard2.removeClass('hide');
+    contDrink.prop("disabled", true);
 })
 
 // Clears user input and resets card view
 clearDrink.click(function(){
+    drinkCard2.html('');
     drinkCard2.addClass('hide');
     drinkRadio[0].checked = false;
     drinkRadio[1].checked = false;
+    drinkInstructions.text('Please select a drink preference to receive your menu suggestions:')
     drinkCard1.removeClass('hide');
+    contDrink.prop("disabled", false);
 })
 
-function getAPI(drinkPreference){
-    if(drinkPreference == 'alcoholic'){
-        alcoholIngredients.forEach(element => {
-            fetch(drinkCatURL+element)
-                .then(response => response.json())
-                    .then(data => filldrinkCatArrayAlcoholic(data))
-        });
-    }else if (drinkPreference == 'non-alocoholic'){
+// Create arrays for drink names and image links
+let drinkArr = [];
+let drinkArrPhotos = [];
 
-    }
-}
+function getAPI(drinkPreference){
+    fetch(drinkCatURL+drinkPreference)
+        .then(response => response.json())
+            .then(data => fillDrinkArr(data))
+                .then(function(){
+                    //pass the name array and the photo link array to the display function
+                    displayDrinks(drinkArr,drinkArrPhotos);
+                })
+};
 
 // This function reads thru the api data and creates an array of categories
 // and an array of the photo links for each category
-function filldrinkCatArrayAlocoholic(data){
-    
-    //create array for category names and image links
-    let drinkCatArray = [];
-    let drinkCatPhotoLinkArray = [];
-    
-    //manages IDs for drinks found in API query
-    let drinkCatIdDrinkArray = [];
-    
-    //for each category returned from the API, store the name in drinkCatArray
-    //and store the photo link in drinkCatPhotoLinkArray
-    for(let i=0;i<=5;i++){
-        
-        // Drink Name
-        drinkCatArray.push(data.categories[i].strDrink);
-        
-        // Drink Image
-        drinkCatPhotoLinkArray.push(data.categories[i].strDrinkThumb);
-        
-        // Drink ID that can be pushed to the 'lookup details' for the api ----we can push to www.thecocktaildb.com/api/json/v1/1/lookup.php?i=[]
-        drinkCatIdDrinkArray.push(data.categories[i].idDrink);
+function fillDrinkArr(data){
+   
+    // Create arrays for drink names and image links
+    drinkArr = [];
+    drinkArrPhotos = [];
+
+    //for each drink returned from the API, store the name in drinkArr
+    //and store the photo link in drinkArrPhotos
+    // Gets a random number from the total number of drinks once
+    var totalDrinks = data.drinks.length;
+
+    for(let i=0;i<20;i++){
+        let randDrink = Math.floor(Math.random()*totalDrinks);
+        if(drinkArr.includes(data.drinks[randDrink].strDrink)){
+            i--;
+        }else if(data.drinks[randDrink].strDrink.length > 20){
+            i--;
+        }else{
+            // Drink Name
+            drinkArr.push(data.drinks[randDrink].strDrink);
+            // Drink Image
+            drinkArrPhotos.push(data.drinks[randDrink].strDrinkThumb);
+        }
     }
-    //pass the name array and the photo link array to the display function
-    displaydrinkCatButtons(drinkCatArray,drinkCatPhotoLinkArray);
+
+    drinkInstructions.text('Here are your drink ideas for the drink preference you selected!')
 }
+    
+
 
 //this function displays the categories by creating elements, filling them
 //with the array data, and then appending them to the drink-categories card
-function displaydrinkCatButtons(drinkCatArray, drinkCatPhotoLinkArray){
+function displayDrinks(drinkCatArray, drinkCatPhotoLinkArray){
     for(let i=0; i<drinkCatArray.length;i++){
-        
+        debugger
         // Create parent div for formatting images with text to display correctly
         let catBtnParent = document.createElement('div');
         catBtnParent.setAttribute('class','col s6 m4 l3');
@@ -92,11 +102,11 @@ function displaydrinkCatButtons(drinkCatArray, drinkCatPhotoLinkArray){
         catBtnParent.append(catBtnText);
 
         // Add parent to card
-        drinkCatCard.append(catBtnParent);
+        drinkCard2.append(catBtnParent);
 
         // Inserts a row at the end to complete card section
         if(i == drinkCatArray.length-1){
-            drinkCatCard.append(`<div class='row'></div>`);
+            drinkCard2.append(`<div class='row'></div>`);
         }
     }
 }
