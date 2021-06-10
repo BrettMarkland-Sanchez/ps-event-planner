@@ -1,24 +1,29 @@
 let playlistKeywordsArea = document.getElementById('playlist-keywords');
 let musicContinue = document.getElementById('contMusic');
 
+//prep all variables for auth token
 let client_id = '76df893ec1954a35913752b0bf902564';
 let client_secret = '3f2775f60e934f7eb0fc83f3c7d2f497';
 let grant_type = 'client_credentials';
 let url = 'https://accounts.spotify.com/api/token';
-let encodedClientIdClientSecret = btoa(client_id+':'+client_secret);
+let encodedClientIdClientSecret = btoa(client_id + ':' + client_secret);
 let authorization = 'Basic ' + encodedClientIdClientSecret;
 let token_type;
 let access_token;
 
+//set headers
 let myHeaders = new Headers();
 //myHeaders.append('Authorization',authorization);
-myHeaders.append('Content-Type','application/x-www-form-urlencoded');
+myHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
 
+//set body
 let urlencoded = new URLSearchParams();
-urlencoded.append('grant_type',grant_type);
-urlencoded.append("client_id",client_id);
-urlencoded.append("client_secret",client_secret);
+urlencoded.append('grant_type', grant_type);
+urlencoded.append("client_id", client_id);
+urlencoded.append("client_secret", client_secret);
 
+
+//set request options
 let requestOptions = {
     method: 'POST',
     headers: myHeaders,
@@ -26,89 +31,79 @@ let requestOptions = {
     redirect: 'follow'
 };
 
+//event listener for click of search button
+musicContinue.addEventListener('click', searchKeywords);
 
-musicContinue.addEventListener('click',searchKeywords);
-
-function searchKeywords(){
+//when search is clicked this function runs
+function searchKeywords() {
     let keywords = playlistKeywordsArea.value;
 
-    fetch(url,requestOptions)
-        .then(response=>response.json())
-        .then(result=>getPlaylists(keywords,result));
-
+    //get auth token and call get playlists function
+    fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(result => getPlaylists(keywords, result));
 }
 
+//this function receives the search keywords and results of auth api
+function getPlaylists(keywords, results) {
 
-function getPlaylists(keywords,results) {
+    //prep search data for playlist API
     let searchQuery = encodeURI(keywords);
     access_token = results.access_token;
     token_type = results.token_type;
 
     const playlistURL = `https://api.spotify.com/v1/search?q=${searchQuery}&type=playlist&market=US&limit=3`;
 
-
     let mySearchHeaders = new Headers();
+    mySearchHeaders.append('Content-Type', 'application/json');
+    mySearchHeaders.append('Authorization', `${token_type} ${access_token}`);
 
-    mySearchHeaders.append('Content-Type','application/json');
-    mySearchHeaders.append('Authorization',`${token_type} ${access_token}`);
-
-    let searchRequestOptions={
-        method:'GET',
-        headers:mySearchHeaders,
-        redirect:'follow'
+    let searchRequestOptions = {
+        method: 'GET',
+        headers: mySearchHeaders,
+        redirect: 'follow'
     };
 
-    fetch(playlistURL,searchRequestOptions)
-        .then(response=>response.json())
-        .then(result=>displayPlaylists(result));
-
-
-
+    //call playlist api and send results to diplay playlists function
+    fetch(playlistURL, searchRequestOptions)
+        .then(response => response.json())
+        .then(result => displayPlaylists(result));
 }
 
-function displayPlaylists(result){
+//this function diplays the playlists on the page
+function displayPlaylists(result) {
     console.log(result.playlists.items);
     let playlistNameArr = [];
-    let playlistImgArr =[];
-    //let playlistTracksArr =[];
+    let playlistImgArr = [];
 
-    // let mySearchHeaders = new Headers();
-
-    // mySearchHeaders.append('Content-Type','application/json');
-    // mySearchHeaders.append('Authorization',`${token_type} ${access_token}`);
-
-    // let searchRequestOptions={
-    //     method:'GET',
-    //     headers:mySearchHeaders,
-    //     redirect:'follow'
-    // };
-
+    //prep html
     $('#music-card').addClass('hide');
     $('#music-card-content').removeClass('hide');
     $('#music-instructions').text('Here are a few playlists you might enjoy!');
     $('#contMusic').addClass('disabled');
 
-    for(let i=0; i<result.playlists.items.length;i++){
+    //for each playlist returned run this loop
+    for (let i = 0; i < result.playlists.items.length; i++) {
         playlistNameArr.push(result.playlists.items[i].name);
         playlistImgArr.push(result.playlists.items[i].images[0].url);
 
+        //lines 98-142 are creating the html elements and putting them into the page
         let playlistDiv = document.createElement('div');
         playlistDiv.className = 'col s12 m6 l4';
         document.getElementById('music-card-content').appendChild(playlistDiv);
 
-        let plCard =document.createElement('div');
+        let plCard = document.createElement('div');
         plCard.className = 'card hoverable'
         playlistDiv.appendChild(plCard);
-    
+
         let playlistCardDiv = document.createElement('div');
         playlistCardDiv.className = 'card small';
         plCard.appendChild(playlistCardDiv);
 
-
         let playlistImgDiv = document.createElement('div');
         playlistImgDiv.className = 'card-image waves-effect waves-block waves-light';
         playlistCardDiv.appendChild(playlistImgDiv);
-        
+
         let plImage = document.createElement('img');
         plImage.className = 'activator';
         plImage.src = result.playlists.items[i].images[0].url;
@@ -133,84 +128,56 @@ function displayPlaylists(result){
         trackDiv.appendChild(revealSpan);
 
         let trackList = document.createElement('ol');
-        trackList.id = 'track-list'+i
+        trackList.id = 'track-list' + i;
         trackDiv.appendChild(trackList);
-        getTrackList(result.playlists.items[i]).then(data=>createSampleTrackList(data,i));
 
-
-        //document.getElementById('music-card').appendChild(playlistDiv);
-
-
-
+        //when populating tracks in cards, call getTrackList function
+        //getTrackList returns a promise which then needs to be read and
+        //passed to createSampleTrackList
+        getTrackList(result.playlists.items[i]).then(data => createSampleTrackList(data, i));
     }
-
-
-    // for(let i=0; i<result.playlists.items.length;i++){
-    //     let plBtn = document.createElement('input');
-    //     plBtn.type = 'image';
-    //     plBtn.src = result.playlists.items[i].images[0].url;
-    //     plBtn.setAttribute('style',`background:${result.playlists.items[i].images[0].url}; width:150px;height:150px;`);
-
-
-    //     document.getElementById('music-card').appendChild(plBtn);
-
-        // fetch(result.playlists.items[i].tracks.href,searchRequestOptions)
-        //     .then(response=>response.json())
-        //     .then(data=>console.log(data));
-   // }
 }
 
-function getTrackList(item){
+//this function populates the first five tracks of a playlist in the card
+function getTrackList(item) {
     let trackURL = item.tracks.href;
-
     let mySearchHeaders = new Headers();
-
-    mySearchHeaders.append('Content-Type','application/json');
-    mySearchHeaders.append('Authorization',`${token_type} ${access_token}`);
-
-    let searchRequestOptions={
-        method:'GET',
-        headers:mySearchHeaders,
-        redirect:'follow'
+    mySearchHeaders.append('Content-Type', 'application/json');
+    mySearchHeaders.append('Authorization', `${token_type} ${access_token}`);
+    let searchRequestOptions = {
+        method: 'GET',
+        headers: mySearchHeaders,
+        redirect: 'follow'
     };
-
-    return fetch(trackURL,searchRequestOptions).then(response=>response.json());        
-
+    return fetch(trackURL, searchRequestOptions).then(response => response.json());
 }
 
-
-function createSampleTrackList(data,playlistNum){
-    let returnArr =[];
-    for(let i=0;i<5;i++){
-        returnArr.push('"'+data.items[i].track.name+'" by '+data.items[i].track.artists[0].name);
+//create the sameple track list elements to add to page
+function createSampleTrackList(data, playlistNum) {
+    let returnArr = [];
+    //for the first 5 tracks
+    for (let i = 0; i < 5; i++) {
+        //add name and artist to array
+        returnArr.push('"' + data.items[i].track.name + '" by ' + data.items[i].track.artists[0].name);
+        //create html element and add to page
         let listItem = document.createElement('li');
-        listItem.setAttribute('style','color:black;margin:30px;')
+        listItem.setAttribute('style', 'color:black;margin:30px;')
         listItem.innerText = returnArr[i];
-
-        let trackList = document.getElementById('track-list'+playlistNum);
+        let trackList = document.getElementById('track-list' + playlistNum);
         trackList.appendChild(listItem);
-        
     }
-    
-    
-
 }
 
-
-
+//logic to clear search
 let musicClearBtn = $('#clearMusic');
+musicClearBtn.on('click', clearMusicClick);
 
-musicClearBtn.on('click',clearMusicClick);
-
+//function to run on clear click
 function clearMusicClick() {
     $('#music-card').removeClass('hide');
     $('#music-card-content').addClass('hide');
-
     $('#music-card-content').html('');
-
     $('#music-instructions').text('For playlist recommendations, please enter a few keywords:');
     playlistKeywordsArea.value = '';
-
     $('#contMusic').removeClass('disabled');
-
 }

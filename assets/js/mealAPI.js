@@ -98,13 +98,15 @@ mealContBtn.on('click',contClick);
 mealClearBtn.on('click',clearClick);
 
 
+//logic for continue button
 function contClick(){
     if(mealCatSelect.length){
         let totalCat = mealCatSelect.length;
         let mealsPerCat = 4;
    
+        //for each category selected run the following loop
         for(let i=0;i<mealCatSelect.length;i++){
-
+            //fetch the list of meals for the category and call getAndDisplayMeals function with data
         fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${mealCatSelect[i]}`)
             .then(response=>response.json())
             .then(data=>getAndDisplayMeals(data,mealsPerCat));
@@ -113,6 +115,7 @@ function contClick(){
     }
 }
 
+//logic for clear button, clear meals, hide card, change instructions
 function clearClick(){
     mealCatCard.attr('class','section card-action center-align');
     mealCard2.attr('class','section card-action center-align hide');
@@ -127,12 +130,16 @@ function clearClick(){
 
 }
 
+//display meals
 function getAndDisplayMeals(data,mealsPerCat){
+
+    //get total meals in data list
     let totalMeals = data.meals.length;
     if(totalMeals<mealsPerCat){
         mealsPerCat = totalMeals;
     }
     let mealArr =[];
+    //
     for(let i=0;i<mealsPerCat;i++){
         let randMeal = Math.floor(Math.random()*totalMeals);
         if(mealArr.includes(data.meals[randMeal])){
@@ -141,6 +148,7 @@ function getAndDisplayMeals(data,mealsPerCat){
         mealArr.push(data.meals[randMeal]);
         }
     }
+
 
     for(let i=0; i<mealArr.length;i++){
         
