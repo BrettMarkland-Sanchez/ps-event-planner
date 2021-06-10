@@ -1,6 +1,7 @@
 # PowerStationProject1
 Group repo for Coding Boot Camp Project1
 ## Team PowerStation Event Planner
+#### GitHub Repository: https://github.com/BrettMarkland-Sanchez/PowerStationProject1
 #### Deployed Site: https://brettmarkland-sanchez.github.io/PowerStationProject1/
 #### Trello Board: https://trello.com/b/7c6ilExZ/team-power-station-coding-project-1
 #### Materialize CSS: https://materializecss.com/
