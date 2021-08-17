@@ -1,5 +1,5 @@
 # Team PowerStation Event Planner
-Group repo for Coding Boot Camp Project1
+Project #1 from GT Coding Bootcamp
 
 #### GitHub Repository: https://github.com/BrettMarkland-Sanchez/PowerStationProject1
 #### Deployed Site: https://brettmarkland-sanchez.github.io/PowerStationProject1/
